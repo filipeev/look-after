@@ -1,5 +1,4 @@
 # look-after
-<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -26,15 +25,3 @@ yarn run test
 yarn run lint
 ```
 
-=======
-Diapers e-commerce
-
-# Run it
-Go to root directory: cd look-after
-Start server using Yarn: yarn serve
-
-Access your local server: http://localhost:8080/
-
-# Build
-To create a production build, run yarn build.
->>>>>>> 2ca772998e0278af713a92abf91f6a3b67863cdf
