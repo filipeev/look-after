@@ -1,0 +1,32 @@
+@import "_variables.scss";
+
+// MEDIA
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+// TOOLS
+@mixin button {
+    background: $primary-color;
+    text-decoration: none;
+    border: none;
+    color: $primary-text;
+    font-size: $secondary-size;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+@mixin gradient($from, $to, $p1, $p2) {
+  background: -moz-linear-gradient(top, $from $p1, $to $p2); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, $from $p1,$to $p2); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, $from $p1,$to $p2); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=0 ); /* IE6-9 */
+}

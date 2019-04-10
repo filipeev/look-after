@@ -1,0 +1,41 @@
+@import "@/styles/_reset.scss";
+@import "@/styles/_variables.scss";
+@import "@/styles/_mixins.scss";
+
+// BASICS
+body {
+    width: 100%;
+}
+select, input, textarea {
+    @include desktop {
+        -webkit-appearance: none;
+    }
+    padding: 8px 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    resize: none;
+    color: rgb(129, 124, 124);
+    background: #fff;
+    border: 1px solid #000;
+}
+@include desktop {
+  .select-form {
+    position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            right: 11px;
+            top: 21px;
+            width: 0;
+            height: 0;
+            border-left: $arrow-size solid transparent;
+            border-right: $arrow-size solid transparent;
+            border-top: $arrow-size solid #000;
+        }
+    }
+}
+
+//

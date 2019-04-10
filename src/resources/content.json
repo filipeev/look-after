@@ -1,0 +1,18 @@
+{
+    "Banner": {
+        "title": "Banner",
+        "src": "../static/assets/banner-1.jpg", 
+        "description": "image description 1"
+    },
+    "About": {
+        "title": "We look after your",
+        "description": "Be welcome to our website, here you will find the best products for your need! We have the best quality for the best price.",
+        "detail": "baby"
+    },
+    "Contact": {
+        "text": "Contact us",
+        "email": "confort@lookafter.com",
+        "find_text": "You can find us:",
+        "address": "1-971-diaper"
+    }
+}

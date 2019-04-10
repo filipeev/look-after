@@ -1,0 +1,21 @@
+{
+    "Carousel": {
+        "title": "Carousel",
+        "show": 4,
+        "nav": true,
+        "items": [
+            {"product": [
+                {"src": "https://i5.walmartimages.com/asr/bd1a294c-bdc2-41d1-b8ce-7b34b8675204_1.d8989f9a93b5899ea51acc9a1a09b20b.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF", "description": "image description 1"},
+                {"src": "https://photos.smugmug.com/Portfolio/Helen-Harper/i-5XXqW8j/0/f908f36b/L/01.%20Pants%204_Maxi_22-L.jpg", "description": "image description 2"},
+                {"src": "https://5.imimg.com/data5/IM/KC/MY-3087637/teddyy-super-baby-diapers-500x500.jpg", "description": "image description 3"},
+                {"src": "http://supermarket.co.ug/1461-tm_thickbox_default/huggies-diapers-delievery.jpg", "description": "image description 4"}                
+            ]},
+            {"product": [
+                {"src": "https://photos.smugmug.com/Portfolio/Helen-Harper/i-Pb3LtHX/0/716673fe/L/05.%20Helen%20Harper%2C%20Baby%20Diapers%20Junior%2054_fin-L.jpg", "description": "image description 1"},
+                {"src": "https://d27zlipt1pllog.cloudfront.net/pub/media/catalog/product/cache/small_image/240x300/beff4985b56e3afdbeabfc89641a4582/b/b/bbb0014.jpg", "description": "image description 2"},
+                {"src": "https://images.costco-static.com/ImageDelivery/imageService?profileId=12026540&imageId=100172324-847__1&recipeName=350", "description": "image description 3"},
+                {"src": "http://www.helenharperbaby.com/en/images/products/panama/diaper-4.png", "description": "image description 4"}                
+            ]}
+        ]
+    }
+}
