@@ -1,7 +1,7 @@
 <template>
   <section class="about-us">
-    <h2>{{ title }} <strong>{{ detail }}</strong></h2>
-    <p>{{ description }}</p>
+    <h2>{{ data.title }} <strong>{{ data.detail }}</strong></h2>
+    <p>{{ data.description }}</p>
   </section>
 </template>
 
@@ -13,9 +13,7 @@ import json from '../resources/content.json';
 export default class Description extends Vue {
   data() {
     return {
-      title: json.About.title,
-      description: json.About.description,
-      detail: json.About.detail,
+      data: json.Description
     }
   }
 }

@@ -1,19 +1,19 @@
 <template>
 <div class="container">
-  <button @click="showModal" v-if="logged == null" class="login-link" value="Sing in">Login</button>
-  <div class="welcome-box" v-if="logged != null">
+  <button @click="showModal" v-if="logged == 'null'" class="login-link" value="Sing in">Login</button>
+  <div class="welcome-box" v-if="logged != 'null'">
     <span>Welcome, {{ userLogged }}</span>
     <button class="login-link" value="About"><router-link to="/About">About</router-link></button>
-    <button @click="logOut" class="login-link" value="logout">Log Out</button>
+    <button @click="logOut" class="login-link" value="logout"><router-link to="/">Log Out</router-link></button>
   </div>
-  <div class="login" v-if="show">
+  <div class="login" v-bind:class="{ active: show }">
     <div class="aligner">
       <div class="aligner-item sing-in" v-if="singIn">
         <h4>{{ data.singin.title }}</h4>
         <p>{{ data.singin.text }}</p>
         <form id="loginForm" @submit="loginForm">
           <div class="form-row">
-            <input type="text" v-model="emailLogin" placeholder="E-mail" required>
+            <input type="email" v-model="emailLogin" placeholder="E-mail" required>
           </div>
           <div class="form-row">
             <input type="password" v-model="passwordLogin" placeholder="Password" required>
@@ -31,13 +31,13 @@
         <p>{{ data.singup.text }}</p>
         <form id="registerForm" @submit="registerForm">
           <div class="form-row">
-            <input type="text" v-model="nameRegister" placeholder="Name" required>
+            <input type="text" v-model="nameRegister" min="3" placeholder="Name" required>
           </div>
           <div class="form-row">
-            <input type="text" v-model="emailRegister" placeholder="E-mail" required>
+            <input type="email" v-model="emailRegister" placeholder="E-mail" required>
           </div>
           <div class="form-row">
-            <input type="text" v-model="phoneRegister" max="9" placeholder="Phone" required>
+            <input type="number" v-model="phoneRegister" min="100000000" max="999999999" placeholder="Phone" required>
           </div>
           <div class="form-row">
             <input type="password" v-model="passRegister" placeholder="Password" required>
@@ -86,28 +86,32 @@ const Login = Vue.extend({
       },
       logOut: function() {
         localStorage.setItem('user', null);
-        this.logged = null;
+        this.logged = 'null';
         this.userLogged = null;
       },
       loginForm: function (e) {
         if (this.emailLogin && this.passwordLogin) {
-          const auth = this.users.filter((x) => { return (
-              x.email == this.emailLogin && x.password == this.passwordLogin 
-            )
-          });
-          if (auth) {
-            const objct = auth[0];
-            const user = {
-              "email": objct.email,
-              "name": objct.name,
-              "phone": objct.phone,
-              "password": objct.password
+          try {const auth = this.users.filter((x) => { return (
+                x.email == this.emailLogin && x.password == this.passwordLogin 
+              )
+            });
+            if (auth) {
+              const objct = auth[0];
+              const user = {
+                "email": objct.email,
+                "name": objct.name,
+                "phone": objct.phone,
+                "registered": Date(),
+                "password": objct.password
+              }
+              localStorage.setItem('user', JSON.stringify(user));
+              this.user = user;
+              this.logged = true;
+              this.userLogged = this.user.name;
+              this.show = false;
             }
-            localStorage.setItem('user', JSON.stringify(user));
-            this.user = user;
-            this.logged = true;
-            this.userLogged = this.user.name;
-            this.show = false;
+          } catch {
+              alert("Invalid user");
           }
           return this.logged;
         }
@@ -118,6 +122,7 @@ const Login = Vue.extend({
             "email": this.emailRegister,
             "name": this.nameRegister,
             "phone": this.phoneRegister,
+            "registered": Date(),
             "password": this.passRegister
           }
           localStorage.setItem('user', JSON.stringify(user));
@@ -129,6 +134,7 @@ const Login = Vue.extend({
         }
       },
       getUser: function() {
+        console.log("getUser:", this.logged);
         let data = JSON.parse(this.logged);
         if(data){
           this.userLogged = data.name; 
@@ -137,7 +143,10 @@ const Login = Vue.extend({
   },
   mounted() {
     this.logged = localStorage.getItem('user');
+    console.log("pegou:", this.logged);
+    if(this.logged != "null"){
       this.getUser();
+    }
   }
 })
 export default Login;
@@ -148,13 +157,18 @@ export default Login;
     .login {
       position: fixed;
       top: 0;
-      left: 0;
+      left: -200%;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 100%;
       background: $tertiary-color;
+      transition: all .8s;
+      transition-delay: .5s;
+      &.active {
+        left: 0;
+      }
       h4 {
         display: block;
         font-size: $ultra-size;
@@ -166,7 +180,7 @@ export default Login;
       }
     }
     .close-modal {
-      position: fixed;
+      position: absolute;
       right: 35px;
       top: 15px;
       font-size: $ultra-size;

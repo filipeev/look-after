@@ -4,7 +4,7 @@
         "src": "../static/assets/banner-1.jpg", 
         "description": "image description 1"
     },
-    "About": {
+    "Description": {
         "title": "We look after your",
         "description": "Be welcome to our website, here you will find the best products for your need! We have the best quality for the best price.",
         "detail": "baby"
@@ -24,5 +24,15 @@
             "title": "Sing in",
             "text": "Login to have full access"
         }
+    },
+    "About": {
+        "text": "Thanks for choosing us, you can see your registerades data here:",
+        "user": {
+            "name": "Welcome, ",
+            "email": "Your e-mail: ",
+            "phone": "Phone: ",
+            "register": "Date of registration: "
+        },
+        "title": "Online Shopping will be available soon."
     }
 }
