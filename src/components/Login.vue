@@ -3,7 +3,7 @@
   <button @click="showModal" v-if="logged == null" class="login-link" value="Sing in">Login</button>
   <div class="welcome-box" v-if="logged != null">
     <span>Welcome, {{ userLogged }}</span>
-    <button @click="showDetails" class="login-link" value="About">About</button>
+    <button class="login-link" value="About"><router-link to="/About">About</router-link></button>
     <button @click="logOut" class="login-link" value="logout">Log Out</button>
   </div>
   <div class="login" v-if="show">
@@ -84,9 +84,6 @@ const Login = Vue.extend({
       showModal: function() {
         this.show = !this.show
       },
-      showDetails: function() {
-        this.show = !this.show
-      },
       logOut: function() {
         localStorage.setItem('user', null);
         this.logged = null;
@@ -133,7 +130,9 @@ const Login = Vue.extend({
       },
       getUser: function() {
         let data = JSON.parse(this.logged);
-        this.userLogged = data.name; 
+        if(data){
+          this.userLogged = data.name; 
+        }
       }
   },
   mounted() {
@@ -238,6 +237,10 @@ export default Login;
       @include button;
       margin-top: 4px;
       float: right;
+      & > * {
+        color: $primary-text;
+        text-decoration: none;
+      }
     }
     .form-row {
       margin-top: 10px;

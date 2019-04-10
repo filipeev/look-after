@@ -16,20 +16,22 @@
 // TOOLS
 @mixin simple_button {
   background: $primary-color;
-    text-decoration: none;
-    border: none;
-    color: $primary-text;
-    font-size: $secondary-size;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: all .5s;
-    outline: none;
-    &:hover {
-      opacity: 0.8;
-    }
+  text-decoration: none;
+  border: none;
+  color: $primary-text;
+  font-size: $secondary-size;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all .5s;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 @mixin button {
   border: none;
+  cursor: pointer;
   font-size: $secondary-size;
   text-transform: uppercase;
   position: relative;

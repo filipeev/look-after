@@ -35,7 +35,7 @@ export default class Description extends Vue {
         margin-top: 209px;
       }
       @include desktop {
-        margin-top: 315px;
+        margin-top: 360px;
       }
     }
     h2 {
@@ -43,6 +43,7 @@ export default class Description extends Vue {
       margin-bottom: 25px;
       opacity: 0.5;
       line-height: 1.3em;
+      font-family: $main-font;
       strong {
         display: block;
         text-transform: uppercase;

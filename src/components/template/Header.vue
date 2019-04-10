@@ -58,7 +58,14 @@ export default Header;
         float: left;
         a {
             text-decoration: none;
+            font-family: $secondary-font;
             font-size: $title-size;
+            @include tablet {
+                font-size: $ultra-size;
+            }
+            @include desktop {
+                font-size: $ultra-size;
+            }
             color: $primary-color;
         }
     }

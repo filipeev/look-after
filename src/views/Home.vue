@@ -9,7 +9,7 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator';
-import Banner from '@/components/Banner.vue'; // @ is an alias to /src
+import Banner from '@/components/Banner.vue';
 import Description from '@/components/Description.vue';
 import Carousel from '@/components/Carousel.vue';
 import Contact from '@/components/Contact.vue';

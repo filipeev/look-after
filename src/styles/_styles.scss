@@ -1,10 +1,12 @@
 @import "@/styles/_reset.scss";
 @import "@/styles/_variables.scss";
 @import "@/styles/_mixins.scss";
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
 // BASICS
 body {
     width: 100%;
+    font-family: $main-font;
 }
 select, input, textarea {
     @include desktop {
