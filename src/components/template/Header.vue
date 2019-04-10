@@ -3,27 +3,33 @@
         <nav>
             <div class="container">
                 <h1 class="logo"><router-link to="/">Look After</router-link></h1>
-                <ul>
-                    <li><a href="javascript:void(0)" class="login-link" title="Sing in">Login</a></li>
-                </ul>
+                <Login />
             </div>
         </nav>
-    <Login />
     </header>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Login } from '@/components/Login.vue';
+import Login from '@/components/Login.vue';
 
-@Component({
-  components: {
-    Login,
-  },
+const Header = Vue.extend({
+    components: {
+        Login
+    },
+    props: ['opens'],
+    data() {
+        return {
+            open: false
+        }
+    },
+    methods: {
+    },
+    mounted() {
+        // this.showModal();
+    }
 })
-export default class Header extends Vue {
-  @Prop() private user!: string;
-}
+export default Header;
 </script>
 
 <style scoped lang="scss">
@@ -55,10 +61,5 @@ export default class Header extends Vue {
             font-size: $title-size;
             color: $primary-color;
         }
-    }
-    .login-link {
-        @include button;
-        margin-top: 8px;
-        float: right;
     }
 </style>

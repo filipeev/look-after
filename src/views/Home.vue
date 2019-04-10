@@ -2,7 +2,7 @@
   <div class="home">
     <Banner />
     <Description />
-    <Carousel quantity="4"/>
+    <Carousel />
     <Contact />
   </div>
 </template>

@@ -14,5 +14,15 @@
         "email": "confort@lookafter.com",
         "find_text": "You can find us:",
         "address": "1-971-diaper"
+    },
+    "Login": {
+        "singup": {
+            "title": "New here ?",
+            "text": "Create your account"
+        },
+        "singin": {
+            "title": "Sing in",
+            "text": "Login to have full access"
+        }
     }
 }
