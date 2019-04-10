@@ -134,7 +134,6 @@ const Login = Vue.extend({
         }
       },
       getUser: function() {
-        console.log("getUser:", this.logged);
         let data = JSON.parse(this.logged);
         if(data){
           this.userLogged = data.name; 
@@ -143,7 +142,6 @@ const Login = Vue.extend({
   },
   mounted() {
     this.logged = localStorage.getItem('user');
-    console.log("pegou:", this.logged);
     if(this.logged != "null"){
       this.getUser();
     }

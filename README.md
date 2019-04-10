@@ -1,5 +1,17 @@
 # look-after
+## Project setup
+```
+Look After - Diapers project
 
+Features:
+-Mobile first project
+-Local JSON
+-Cookie login
+-Carousel 
+-No libs
+-No Jquery
+
+```
 ## Project setup
 ```
 yarn install
@@ -14,14 +26,3 @@ yarn run serve
 ```
 yarn run build
 ```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
