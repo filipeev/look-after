@@ -4,8 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
+import { Component, Vue } from 'vue-property-decorator';
 import json from '../resources/content.json';
 @Component
 export default class Banner extends Vue {
@@ -22,9 +22,12 @@ export default class Banner extends Vue {
     @import "@/styles/_variables.scss";
     .banner {
       position: fixed;
+      width: 100%;
       top: $header-h;
       img {
-        width: 100%;
+        min-height: 80px;
+        max-width: 120%;
+        margin: 0 auto;
       }
     }
 </style>

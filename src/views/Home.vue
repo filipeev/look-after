@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from 'vue-property-decorator';
 import Banner from '@/components/Banner.vue'; // @ is an alias to /src
 import Description from '@/components/Description.vue';
@@ -23,10 +23,9 @@ import Contact from '@/components/Contact.vue';
   },
 })
 export default class Home extends Vue {
-  data () {
+  data() {
     return {
-      quantity: 4
-    }
+    };
   }
 }
 </script>

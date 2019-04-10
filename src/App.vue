@@ -7,7 +7,7 @@
 </template>
 
 // SCRIPTS
-<script lang="ts">
+<script>
   import { Component, Vue } from 'vue-property-decorator';
   import Header from '@/components/template/Header.vue';
   import Footer from '@/components/template/Footer.vue';

@@ -1,72 +1,130 @@
 <template>
 <div class="container">
   <button @click="showModal" class="login-link" value="Sing in">Login</button>
-  <div class="login" v-if="show" v-on:change="showModal">
+  <div class="login" v-if="show">
     <div class="aligner">
       <div class="aligner-item sing-in" v-if="singIn">
         <h4>{{ data.singin.title }}</h4>
         <p>{{ data.singin.text }}</p>
-        <form>
+        <form id="loginForm" @submit="loginForm">
           <div class="form-row">
-            <input type="text" placeholder="E-mail" required>
+            <input type="text" v-model="emailLogin" placeholder="E-mail" required>
           </div>
           <div class="form-row">
-            <input type="password" placeholder="Password" required>
+            <input type="password" v-model="passwordLogin" placeholder="Password" required>
           </div>
           <div class="form-row">
-            <button class="change-type" v-on:click="singIn = !singIn">Sing up</button>
+            <button class="change-type" @click="singIn = !singIn">Sing up</button>
             <button type="submit">Ok</button>
           </div>
         </form>
-        <button class="close-modal" v-on:click="show = !show" value="x">X</button>
+        <button class="close-modal" @click="show = !show" value="x">X</button>
       </div>
 
       <div class="aligner-item sing-up" v-if="!singIn">
         <h4>{{ data.singup.title }}</h4>
         <p>{{ data.singup.text }}</p>
-        <form>
+        <form id="registerForm" @submit="registerForm">
           <div class="form-row">
-            <input type="text" placeholder="Name" required>
+            <input type="text" v-model="nameRegister" placeholder="Name" required>
           </div>
           <div class="form-row">
-            <input type="text" placeholder="E-mail" required>
+            <input type="text" v-model="emailRegister" placeholder="E-mail" required>
           </div>
           <div class="form-row">
-            <input type="password" placeholder="Password" required>
+            <input type="text" v-model="phoneRegister" max="9" placeholder="Phone" required>
           </div>
           <div class="form-row">
-            <button class="change-type" v-on:click="singIn = !singIn">Sing in</button>
+            <input type="password" v-model="passRegister" placeholder="Password" required>
+          </div>
+          <div class="form-row">
+            <button class="change-type" @click="singIn = !singIn">Sing in</button>
             <button type="submit">Ok</button>
           </div>
         </form>
-        <button class="close-modal" v-on:click="show = !show" value="x">X</button>
+        <button class="close-modal" @click="show = !show" value="x">X</button>
       </div>
     </div>
   </div>
 </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+<script>
+import { Vue } from 'vue-property-decorator';
 import json from '@/resources/content.json';
+import users from '@/resources/users.json';
 const Login = Vue.extend({
     components: {
         
     },
     data() {
       return {
+        emailLogin: null,
+        passwordLogin: null,
+        nameRegister: null,
+        emailRegister: null,
+        phoneRegister: null,
+        passRegister: null,
+        errors: null,
         show: false,
         singIn: true,
-        data: json.Login
+        data: json.Login,
+        users: users.Accounts.users,
+        user: null,
+        loged: null
       }
     },
     methods: {
-        showModal: function() {
-          this.show = !this.show
+      showModal: function() {
+        this.show = !this.show
+      },
+      loginForm: function (e) {
+        if (this.emailLogin && this.passwordLogin) {
+          const auth = this.users.filter((x) => { return (
+              x.email == this.emailLogin && x.password == this.passwordLogin 
+            )
+          });
+          console.log('auth:', auth);
+          if (auth.legth > 0) {
+            this.user = auth[0];
+            this.loged = true;
+          }
+          return this.loged;
         }
-    },
-    mounted() {
-    }
+
+        this.errors = [];
+
+        if (!this.emailLogin) {
+          this.errors.push('Email is required.');
+        }
+        if (!this.passwordLogin) {
+          this.errors.push('A idade é obrigatória.');
+        }
+      },
+      registerForm: function (e) {
+        if (this.emailRegister && this.nameRegister && this.phoneRegister && this.passRegister) {
+          const user = {
+            "email": this.emailRegister,
+            "name": this.nameRegister,
+            "phone": this.phoneRegister,
+            "password": this.passRegister
+          }
+          console.log('new user: ', user);
+          return true;
+        }
+
+        this.errors = [];
+
+        if (!this.emailLogin) {
+          this.errors.push('Email is required.');
+        }
+        if (!this.passwordLogin) {
+          this.errors.push('A idade é obrigatória.');
+        }
+      },
+  },
+  mounted() {
+  }
 })
 export default Login;
 </script>
@@ -100,16 +158,17 @@ export default Login;
       font-size: $ultra-size;
       border: none;
       background: none;
+      outline: none;
     }
     .aligner {
       display: flex;
-      width: 100%;
-      max-width: 500px;
+      width: 80%;
       align-items: center;
       justify-content: center;
     }
     .aligner-item {
-      max-width: 50%;
+      width: 80%;
+      max-width: 500px;
     }
     .login-link {
       @include button;
@@ -122,11 +181,17 @@ export default Login;
         font-size: $secondary-size;
       }
     }
-    form button {
-      @include simple_button;
-      width: 48%;
-      &:first-child {
-        margin-right: 4%; 
+    form {
+      input {
+        background: rgba(255, 255, 255, 0.66);
+        border: none;
+      }
+      button {
+        @include simple_button;
+        width: 48%;
+        &:first-child {
+          margin-right: 4%; 
+        }
       }
     }
 </style>

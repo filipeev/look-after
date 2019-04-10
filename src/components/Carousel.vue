@@ -1,21 +1,19 @@
 <template>
   <div class="wrapper">
     <carousel-component>
-      <div class="button-wrapper">
-          <button data-action="slideLeft">L</button>
-          <button data-action="slideRight">R</button>
-      </div>
       <carousel-item v-for="products in items" v-bind:key="products.items">
         <div v-for="product in products.product" v-bind:key="product.product" class="product">
           <img :src="product.src" :alt="product.description">
+          <strong>Diaper sample</strong>
+          <span>Size: 6 lbs (2.7 kg)	Swaddlers Preemie</span>
         </div>
       </carousel-item>
     </carousel-component>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
+import { Vue } from 'vue-property-decorator';
 import json from '../resources/carousel.json';
 
 Vue.component('carousel-component', {
@@ -62,7 +60,7 @@ Vue.component('carousel-component', {
     }
   },
   methods: {
-    autoPlay: function(locked: Boolean) {
+    autoPlay: function(locked) {
       clearTimeout(this.timer);
       if(this.auto && !this.hover){
         this.timer = setTimeout(() => {
@@ -181,6 +179,11 @@ export default Carousel;
         max-width: 250px;
         max-height: 250px;
       }
+    }
+    strong {
+      display: block;
+      font-weight: bold;
+      font-size: $tertiary-size;
     }
   }
 }

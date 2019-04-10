@@ -53,13 +53,12 @@
     transform: skewX(0deg);
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: -2;
+    background-color: $secondary-color;
   }
   &::before {
-    background-color: $secondary-color;
     left: 0;
   }
   &::after {
-    background-color: $tertiary-color;
     right: 0;
   }
   &:hover {

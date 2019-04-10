@@ -9,8 +9,8 @@
     </header>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
+import { Vue } from 'vue-property-decorator';
 import Login from '@/components/Login.vue';
 
 const Header = Vue.extend({
@@ -53,7 +53,7 @@ export default Header;
     }
     .logo{
         line-height: 50px;
-        display: inline-block;
+        display: block;
         text-align: left;
         float: left;
         a {

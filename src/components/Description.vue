@@ -5,8 +5,8 @@
   </section>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
+import { Component, Vue } from 'vue-property-decorator';
 import json from '../resources/content.json';
 
 @Component
