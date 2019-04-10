@@ -1,6 +1,11 @@
 <template>
 <div class="container">
-  <button @click="showModal" class="login-link" value="Sing in">Login</button>
+  <button @click="showModal" v-if="logged == null" class="login-link" value="Sing in">Login</button>
+  <div class="welcome-box" v-if="logged != null">
+    <span>Welcome, {{ userLogged }}</span>
+    <button @click="showDetails" class="login-link" value="About">About</button>
+    <button @click="logOut" class="login-link" value="logout">Log Out</button>
+  </div>
   <div class="login" v-if="show">
     <div class="aligner">
       <div class="aligner-item sing-in" v-if="singIn">
@@ -71,12 +76,21 @@ const Login = Vue.extend({
         data: json.Login,
         users: users.Accounts.users,
         user: null,
-        loged: null
+        logged: null,
+        userLogged: null
       }
     },
     methods: {
       showModal: function() {
         this.show = !this.show
+      },
+      showDetails: function() {
+        this.show = !this.show
+      },
+      logOut: function() {
+        localStorage.setItem('user', null);
+        this.logged = null;
+        this.userLogged = null;
       },
       loginForm: function (e) {
         if (this.emailLogin && this.passwordLogin) {
@@ -84,21 +98,21 @@ const Login = Vue.extend({
               x.email == this.emailLogin && x.password == this.passwordLogin 
             )
           });
-          console.log('auth:', auth);
-          if (auth.legth > 0) {
-            this.user = auth[0];
-            this.loged = true;
+          if (auth) {
+            const objct = auth[0];
+            const user = {
+              "email": objct.email,
+              "name": objct.name,
+              "phone": objct.phone,
+              "password": objct.password
+            }
+            localStorage.setItem('user', JSON.stringify(user));
+            this.user = user;
+            this.logged = true;
+            this.userLogged = this.user.name;
+            this.show = false;
           }
-          return this.loged;
-        }
-
-        this.errors = [];
-
-        if (!this.emailLogin) {
-          this.errors.push('Email is required.');
-        }
-        if (!this.passwordLogin) {
-          this.errors.push('A idade é obrigatória.');
+          return this.logged;
         }
       },
       registerForm: function (e) {
@@ -109,21 +123,22 @@ const Login = Vue.extend({
             "phone": this.phoneRegister,
             "password": this.passRegister
           }
-          console.log('new user: ', user);
+          localStorage.setItem('user', JSON.stringify(user));
+          this.user = user;
+          this.logged = true;
+          this.userLogged = this.user.name;
+          this.show = false;
           return true;
         }
-
-        this.errors = [];
-
-        if (!this.emailLogin) {
-          this.errors.push('Email is required.');
-        }
-        if (!this.passwordLogin) {
-          this.errors.push('A idade é obrigatória.');
-        }
       },
+      getUser: function() {
+        let data = JSON.parse(this.logged);
+        this.userLogged = data.name; 
+      }
   },
   mounted() {
+    this.logged = localStorage.getItem('user');
+      this.getUser();
   }
 })
 export default Login;
@@ -169,6 +184,55 @@ export default Login;
     .aligner-item {
       width: 80%;
       max-width: 500px;
+    }
+    .welcome-box {
+      width: 100%;
+      display: table;
+      position: absolute;
+      right: 15px;
+      span {
+        display: none;
+      }
+      button {
+        font-size: $primary-size;
+        letter-spacing: 1px;
+        padding: 5px;
+      }
+      @include desktop {
+        display: flex;
+        float: right;
+        position: static;
+        width: auto;
+        button {
+          padding: 5px 15px;
+        }
+        span {
+          vertical-align: middle;
+          padding-right: 20px;
+          display: flex;
+          float: left;
+          line-height: 46px;
+        }
+      }
+      @include tablet {
+        display: flex;
+        float: right;
+        position: static;
+        width: auto;
+        button {
+          padding: 5px 15px;
+        }
+        span {
+          vertical-align: middle;
+          padding-right: 20px;
+          display: flex;
+          float: left;
+          line-height: 46px;
+        }
+      }
+      button {
+        margin-left: 15px;
+      }
     }
     .login-link {
       @include button;

@@ -3,9 +3,13 @@
     <carousel-component>
       <carousel-item v-for="products in items" v-bind:key="products.items">
         <div v-for="product in products.product" v-bind:key="product.product" class="product">
-          <img :src="product.src" :alt="product.description">
-          <strong>Diaper sample</strong>
-          <span>Size: 6 lbs (2.7 kg)	Swaddlers Preemie</span>
+          <div class="container">
+            <img :src="product.src" :alt="product.description">
+            <div class="description">
+              <strong>{{ product.name }}</strong>
+              <span>{{ product.unit }}: {{ product.value }}</span>
+            </div>
+          </div>
         </div>
       </carousel-item>
     </carousel-component>
@@ -123,98 +127,116 @@ export default Carousel;
 
 <style lang="scss">
   @import "@/styles/_mixins.scss";
-
       
-.wrapper {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 55px 0;
-  background: white;
-  border-bottom: 1px solid #EEE;
-}
-
-.carousel-component {
-  position: relative;
-  overflow: hidden;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.carousel-page {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: 0.5s;
-  padding: 10px;
-  box-sizing: border-box;
-  &.active {
-    visibility: visible;
-    position: static;
-  }
-
-  h2 {
-    margin: 0;
-  }
-}
-
-.carousel-item {
-  .product {
-    display: inline-block;
+  .wrapper {
     width: 100%;
-    vertical-align: top;
-    @include tablet {
-      width: 50%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 55px 0;
+    background: white;
+    border-bottom: 1px solid #EEE;
+  }
+
+  .carousel-component {
+    position: relative;
+    overflow: hidden;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .carousel-page {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: 0.5s;
+    padding: 10px;
+    box-sizing: border-box;
+    &.active {
+      visibility: visible;
+      position: static;
     }
-    @include desktop {
-      width: 50%;
+
+    h2 {
+      margin: 0;
     }
-    img {
-      max-width: 150px;
-      max-height: 150px;
+  }
+
+  .carousel-item {
+    .product {
+      display: inline-block;
+      width: 100%;
+      vertical-align: top;
+      margin-bottom: 25px;
+      @include tablet {
+        width: 50%;
+      }
       @include desktop {
-        max-width: 250px;
-        max-height: 250px;
+        width: 50%;
+      }
+      .container {
+        padding: 25px;
+      }
+      img {
+        max-width: 150px;
+        height: 150px;
+        margin-bottom: 25px;
+        vertical-align: top;
+        @include desktop {
+          max-width: 250px;
+          max-height: 250px;
+        }
+      }
+      .description {
+        vertical-align: -webkit-baseline-middle;
+      }
+      strong {
+        display: block;
+        font-weight: bold;
+        font-size: $tertiary-size;
+        margin-bottom: 10px;
       }
     }
-    strong {
-      display: block;
-      font-weight: bold;
-      font-size: $tertiary-size;
+  }
+
+  .carousel-nav-prev,
+  .carousel-nav-next {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    background: transparent;
+    color: transparent;
+    font-size: 0;
+    outline: none;
+    transition: all .8s;
+    cursor: pointer;
+    &:hover {
+      opacity: .7;
+      transform: translate(-12%, -50%);
     }
   }
-}
 
-.carousel-nav-prev,
-.carousel-nav-next {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  display: block;
-  width: 50px;
-  height: 50px;
-  border: 0;
-  background: transparent;
-  color: transparent;
-  font-size: 0;
-  outline: none;
-  cursor: pointer;
-}
+  .carousel-nav-prev {
+    left: $safe-space;
+    border-top: $caorusel-size solid transparent;
+    border-bottom: $caorusel-size solid transparent;
+    border-right:$caorusel-size solid $primary-color;
+  }
 
-.carousel-nav-prev {
-  left: $safe-space;
-  border-top: $caorusel-size solid transparent;
-  border-bottom: $caorusel-size solid transparent;
-  border-right:$caorusel-size solid $primary-color;
-}
-
-.carousel-nav-next {
-  right: $safe-space;
-  border-top: $caorusel-size solid transparent;
-  border-bottom: $caorusel-size solid transparent;
-  border-left: $caorusel-size solid $primary-color;
-}
+  .carousel-nav-next {
+    right: $safe-space;
+    border-top: $caorusel-size solid transparent;
+    border-bottom: $caorusel-size solid transparent;
+    border-left: $caorusel-size solid $primary-color;
+    &:hover {
+      opacity: .7;
+      transform: translate(12%, -50%);
+    }
+  }
 </style>
